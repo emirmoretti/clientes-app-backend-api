@@ -2,6 +2,7 @@ package com.bolsadeideas.springbootbackendapirest.controllers;
 
 import com.bolsadeideas.springbootbackendapirest.models.entity.Cliente;
 
+import com.bolsadeideas.springbootbackendapirest.models.entity.Region;
 import com.bolsadeideas.springbootbackendapirest.models.services.ClienteServiceImpl;
 import com.bolsadeideas.springbootbackendapirest.models.services.IUploadFileService;
 import org.slf4j.Logger;
@@ -75,18 +76,9 @@ public class ClienteRestController {
 
     @PostMapping("/clientes")
     public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
-        // cliente.setDate(new Date());
         Cliente clientNew = null;
         Map<String, Object> response = new HashMap<>();
-        /* forma ant al jdk8
-        if(result.hasErrors()){
-            List<String> errors = new ArrayList<>();
-            for (FieldError err: result.getFieldErrors()){
-                errors.add(err.getDefaultMessage());
-            }
-            response.put("errors", errors);
-            return new ResponseEntity<Map<String,Object>>(response, HttpStatus.BAD_REQUEST);
-        }*/
+
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors()
                     .stream()
@@ -140,6 +132,7 @@ public class ClienteRestController {
             clienteActual.setApellido(cliente.getApellido());
             clienteActual.setEmail(cliente.getEmail());
             clienteActual.setDate(cliente.getDate());
+            clienteActual.setRegion(cliente.getRegion());
             clienteActualizado = clienteService.save(clienteActual);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al crear al cliente");
@@ -214,5 +207,10 @@ public class ClienteRestController {
         cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 
         return new ResponseEntity<Resource>(recurso,cabecera, HttpStatus.OK);
+    }
+
+    @GetMapping("/clientes/regiones")
+    public List<Region> listaRegion() {
+        return clienteService.findAllRegiones();
     }
 }
