@@ -22,8 +22,8 @@ INSERT INTO clientes (region_id, nombre, apellido, email, create_at) VALUES(3,'J
 
 /*usuarios*/
 
-INSERT INTO  `usuarios` (username, password, enabled) VALUES ('emir', '$2a$10$ABobr0Zx1489/xqh.v9h8eERYLG8Zz.NRZxapnprqcBbucSCmYKoG', 1);
-INSERT INTO  `usuarios` (username, password, enabled) VALUES ('admin', '$2a$10$wZpqtW547sk7PUv7LZ9.RuJ0aDutOgD0AAaLE0WAiodV0AC0xCEhG', 1);
+INSERT INTO  `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('emir', '$2a$10$ABobr0Zx1489/xqh.v9h8eERYLG8Zz.NRZxapnprqcBbucSCmYKoG', 1, 'emir', 'moretti', 'emir@moretti.com');
+INSERT INTO  `usuarios` (username, password, enabled, nombre, apellido, email) VALUES ('admin', '$2a$10$wZpqtW547sk7PUv7LZ9.RuJ0aDutOgD0AAaLE0WAiodV0AC0xCEhG', 1, 'emir2', 'moretti', 'emi@moretti');
 
 INSERT INTO `roles` (nombre) VALUES ('ROLE_USER');
 INSERT INTO `roles` (nombre) VALUES ('ROLE_ADMIN');
